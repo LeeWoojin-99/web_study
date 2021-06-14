@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+	<meta charset="UTF-8">
+</head>
+<style>
+	/* init */
+	*{
+		padding: 0;
+		margin: 0;
+	}
+	ul{
+		list-style-type: none;
+	}
+	a{
+		text-decoration: none;
+	}
+
+	body{
+		margin : 0;
+		padding : 0;
+		background-color: #ffbb00;
+		font-family: "나눔스퀘어라운드";
+	}
+
+
+	/* header */
+	#header{
+		height: 80px;
+		margin: 0;
+		padding: 0;
+		font-weight: lighter;
+		background-color: rgb(0,0,0,0.1);
+		box-sizing: border-box;
+	}
+	a.menu_home img{
+		position: absolute;
+		left: 50%;
+		width: 100px;
+		height: 100px;
+		transform: translate(-50%);
+	}
+
+
+	/* menu */
+	#menu{
+		display: block;
+		width: 1200px;
+		margin: 0 auto;
+		padding: 0;
+	}
+	.menu_left{float: left;}
+	.menu_right{float: right;}
+	#menu>li{margin: 0px 10px;}
+	#menu>li>a{
+		display: block;
+		height: 80px; /* box-sizing:  border-box; 를 적용하기 위해서 */
+		line-height: 80px; /* 글자를 세로 가운데로 정렬시키기 위해서 height와 같은 값 */
+		padding: 0px 20px; /* 가로 세로 */
+		font-size: 50px;
+		text-align: center;
+		color: black;
+		box-sizing: border-box; /* hover 밑줄 효과가 나타날 때 크기가 변경되지 않도록 */
+		background-color: rgb(0,0,0,0.1); /* test */
+	}
+	#menu>li>a:hover{
+		background-color: rgb(0,0,0,0.2); /* test */
+		border-bottom: 4px solid black;
+	}
+
+	/* sub menu */
+	ul.sub_menu{
+		display: none;
+		position: absolute;
+		width: 220px;
+		list-style-type: none;
+		background-color: rgb(0,0,0,0.1);
+	}
+	#menu>li:hover>ul{
+		display: block;
+	}
+	ul.sub_menu>li{
+		position: relative;
+		width: 100%;
+	}
+	ul.sub_menu>li>a{
+		display: block;
+		height: 50px;
+		line-height: 50px;
+		padding-left: 20px;
+		font-size: 24px;
+		text-algin: left;
+		text-decoration: none;
+		color: black;
+		background-color: rgb(0,0,0,0.1);
+	}
+	.sub_menu>li>a:hover{
+		background-color: rgb(0,0,0,0.2);
+	}
+</style>
+
+<body>
+	<div id="header">
+		<a href="#" class="menu_home"></a>
+		<ul id="menu">
+			<!-- 주석 -->
+			<li class="menu_left"><a href="#header">header</a>
+			</li>
+			<li class="menu_left"><a href="#container">container</a>
+				<ul class="sub_menu">
+					<li><a href="">Programmer</a></li>
+					<li><a href="">English</a></li>
+					<li><a href="">Korean</a></li>
+				</ul>
+			</li>
+			<li class="menu_right"><a href="#footer">footer1</a>
+			</li>
+			<li class="menu_right"><a href="#footer">footer2</a>
+				<ul class="sub_menu">
+					<li><a href="">sub1</a></li>
+					<li><a href="">sub2</a></li>
+					<li><a href="">sub3</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>
