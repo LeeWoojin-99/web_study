@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- 바뀔 부분(.overlay)에 클래스를 부여했더니 제대로 된 동작이 나오지 않아서
+ 바뀔 부분의 상위(body)에 클래스를 부여하여
+ 부여했을 때의 바뀔 부분의 css를 작성 -->
+<html>
+<head>
+    <meta charset = "utf-8" />
+    <link rel="stylesheet" href="main.css">
+    <script>
+        function on(){
+            var target = document.querySelector('body');
+            target.setAttribute("class", "active")
+        }
+        function off(){
+            var target = document.querySelector('body');
+            target.setAttribute("class", "")
+        }
+    </script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .btn{
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 0, 0, 0.6);
+            cursor: pointer;
+            float: left;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 100px;
+        }
+
+        .overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: -999;
+
+          width: 100%;
+          height: 100%;
+          background: RGBA(0, 0, 0, 0.5);
+          
+          opacity: 0;
+          transition: opacity 1s;
+          
+          cursor: pointer;
+        }
+
+        body.active .overlay{
+            /* .overlay .active 로 했을 때는 안되고
+            body에 .active를 줘서 이렇게 했을 때는 된다. */
+            opacity: 1;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <div class="btn" onclick="on();">버튼</div>
+    <div class="overlay" onclick="off();"></div>
+</body>
+</html>

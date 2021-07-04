@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset = "utf-8" />
+    <link rel="stylesheet" href="main.css">
+<script type="text/javascript">
+function on(){
+    var target = document.getElementById("c");
+    target.style.display = "block";
+    target.style.animation = "fade_in 0.6s";
+}
+function off(){
+    var target = document.getElementById("c");
+    setTimeout(() => target.style.display = "none", 600)
+    target.style.animation = "fade_out 0.6s";
+}
+</script>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#a{
+    width: 100px;
+    height: 100px;
+    opacity: 0.8;
+    background-color: red;
+    cursor: pointer;
+    float: left;
+}
+#b{
+    width: 100px;
+    height: 100px;
+    opacity: 0.8;
+    background-color: blue;
+    cursor: pointer;
+    float: left;
+}
+#c{
+    display: block;
+    position: fixed;
+    top: 100px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 1);
+    cursor: pointer;
+}
+
+@keyframes fade_out{
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}
+@keyframes fade_in{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+</style>
+</head>
+<body>
+    <div id="a" onclick="on();"></div>
+    <div id="b" onclick="off();"></div>
+    <div id="c"></div>
+</body>
+</html>
