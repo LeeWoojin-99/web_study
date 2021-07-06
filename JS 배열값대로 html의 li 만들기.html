@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        javascript로 html의 li태그를 만들기
+    -->
+    <meta charset = "utf-8" />
+
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+    <h1>Lee WooJin</h1>
+    <ul>
+        <script>
+            var lwj_name = ["lee", "woo", "jin"];
+            console.log(lwj_name.length);
+            for (i of lwj_name){
+                console.log(i);
+            }
+
+            var i = 0;
+            while(i < lwj_name.length){
+                document.write("<li><a href=\"\">" + lwj_name[i] + "</a></li>");
+                console.log(i);
+                i++;
+            }
+        </script>
+    </ul>
+</body>
+</html>
