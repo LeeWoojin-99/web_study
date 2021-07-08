@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!--
+    슬라이드
+    투명도가 바뀌며 전환된다.
+    일정 시간마다 자동으로 전환된다.
+    이전, 다음, 순서 버튼이 존재하며 누를 때마다 알맞는 동작이 된다.
+    버튼을 누르면 자동으로 전환하기 위해 존재하는 타이머가 초기화된다.
+-->
+<html>
+<head>
+    <meta charset = "utf-8" />
+
+    <style type="text/css">
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            background-color: darkorange;
+        }
+
+        #swiper_wrapper{
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        .swiper_slide{
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            font-size: 24px;
+
+            transition: all 0.5s;
+            opacity: 0;
+            visibility: hidden;
+        }
+        .swiper_slide.active{
+            color: white;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #swiper_btn_wrapper{
+            position: absolute;
+            bottom: -30px;
+            left: 10px;
+        }
+        .swiper_btn{
+            float: left;
+            margin-right: 10px;
+
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+
+            cursor: pointer;
+        }
+        #swiper_prev_btn, #swiper_next_btn{
+            position: absolute;
+            top: 50%;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            color: white;
+        }
+        #swiper_prev_btn{
+            left: 0px;
+        }
+        #swiper_next_btn{
+            right: 0px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        
+    </script>
+    <h1>슬라이드를 만들어보자</h1>
+    <div id="swiper_wrapper">
+        <div class="swiper_slide" data-swiper_slide_index="0" style="background-color: red;">swiper_slide 0</div>
+        <div class="swiper_slide" data-swiper_slide_index="1" style="background-color: green;">swiper_slide 1</div>
+        <div class="swiper_slide" data-swiper_slide_index="2" style="background-color: blue;">swiper_slide 2</div>
+        <div class="swiper_slide" data-swiper_slide_index="3" style="background-color: powderblue;">swiper_slide 3</div>
+        <div id="swiper_btn_wrapper">
+            <div class="swiper_btn" data-swiper_btn_index="0" onclick="slide.btn_click(this); "></div>
+            <div class="swiper_btn" data-swiper_btn_index="1" onclick="slide.btn_click(this);"></div>
+            <div class="swiper_btn" data-swiper_btn_index="2" onclick="slide.btn_click(this);"></div>
+            <div class="swiper_btn" data-swiper_btn_index="3" onclick="slide.btn_click(this);"></div>
+        </div>
+        <div id="swiper_prev_btn" onclick="slide.prev();">prev</div>
+        <div id="swiper_next_btn" onclick="slide.next();">next</div>
+    </div>
+    <script>
+        var slide = {
+            prev_index : 0, curr_index : 1, next_index : 2,
+            max_index : 3,
+            target_swiper_slide : document.querySelectorAll('.swiper_slide'),
+            active : function(index){
+                this.target_swiper_slide[index].classList.add('active');
+            },
+            remove_active : function(index){
+                this.target_swiper_slide[index].classList.remove('active');
+            },
+            next : function(){
+                // 현재 활성화되어있는 slide를 비활성화 시키고 다음 인덱스의 slide를 활성화시키는 메서드
+                clearInterval(slide_timer); // 버튼이 눌린 시점에서 시간마다 반복하는 것을 잠시 멈추기
+                this.remove_active(this.curr_index); // 이전 인덱스를 비활성화
+                this.index_process(this.curr_index +1) // 현재 인덱스를 다음 인덱스로 변경
+                this.active(this.curr_index); // 현재 인덱스를 활성화
+                slide_timer = setInterval(function(){slide.next();},4000); // 시간마다 반복하는 것을 다시 시작
+                // var slide_timer ... 으로 하면 객체의 메서드 안에서 새롭게 선언하는 것이기 때문에
+                // 다른 곳에서 clearInterval로 반복을 멈출 수 없다.
+                // 그래서 var을 붙이지 않고 전역 변수 slide_timer에 넣어주는 것이다.
+                // var을 붙이면 안된다.
+            },
+            prev : function(){
+                // 현재 활성화되어있는 slide를 비활성화 시키고 이전 인덱스의 slide를 활성화시키는 메서드
+                clearInterval(slide_timer);
+                this.remove_active(this.curr_index);
+                this.index_process(this.curr_index -1);
+                this.active(this.curr_index);
+                slide_timer = setInterval(function(){slide.next();},4000);
+            },
+            btn_click : function(self){
+                // 클릭한 버튼의 인덱스값을 알아내서 해당 인덱스의 slide를 활성화시켜주는 메서드
+                // self.dataset.swiper_btn_index : 버튼이 눌린 인덱스값
+                clearInterval(slide_timer);
+                this.remove_active(this.curr_index);
+                this.index_process(Number(self.dataset.swiper_btn_index));
+                this.active(this.curr_index);
+                slide_timer = setInterval(function(){slide.next();},4000);
+            },
+            index_process : function(current_index){
+                // 인덱스를 입력하면 이전, 현재, 다음 인덱스를 계산해주는 메서드
+                // curr_index 처리 과정
+                if (current_index > this.max_index){
+                    current_index = 0;
+                }else if (current_index < 0){
+                    current_index = this.max_index;
+                }
+                this.curr_index = current_index;
+                // prev_index 처리 과정
+                this.prev_index = this.curr_index -1;
+                if (this.prev_index < 0) this.prev_index = this.max_index;
+                // next_index 처리 과정
+                this.next_index = this.curr_index +1;
+                if (this.next_index > this.max_index) this.next_index = 0;
+            }
+        }
+        var slide_timer = setInterval(function(){slide.next();},4000);
+        slide.btn_click(document.querySelectorAll('.swiper_btn')[0]);
+        // 두 순서가 뒤바뀌면 오류가 발생한다.
+        // slide.btn_click() 안에서 변수 slide_timer를 제어하는 문장이 있는데
+        // slide_timer가 선언되기 전에 그 문장이 나오면 제대로된 동작이 나올 수 없기 때문이다.
+
+    </script>
+</body>
+</html>
