@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "..\\..\\..\\Python"
+		},
+		{
+			"path": "..\\.."
+		},
+		{
+			"name": "web_study",
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "Web"
+	}
+}
