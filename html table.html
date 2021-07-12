@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        table{
+            width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <!-- tr : table row : 테이블의 행 -->
+            <!-- tr태그 안에는 th, td태그만 들어갈 수 있다. -->
+            <th>th1</th>
+            <!-- th : table header : 테이블의 제목 셀 -->
+            <th>th2</th>
+            <th>th3</th>
+        </tr>
+        <tr>
+            <td rowspan="2">td1</td>
+            <!-- rowspan : row span : 행(row)의 병합(span) -->
+            <td colspan="2">td2</td>
+            <!-- colspan : column span : 열(column)의 병합(span) -->
+        </tr>
+        <tr>
+            <td>td2</td>
+            <td>td3</td>
+        </tr>
+    </table>
+    <br><br><br>
+    <table border="1">
+        <caption>table caption</caption>
+        <!-- caption : 표의 제목을 나타낸다. table태그의 가장 첫 번째 자식으로 와야한다. -->
+
+        <!-- thead, tbody, tfoot 태그는 table에서 행으로 구조적 의미를 가지게 한다. -->
+        <!-- table의 자식으로 올 수 있으며 caption과 colgroup의 다음으로 올 수 있다. -->
+        <thead>
+            <tr>
+                <th>thead th1</th>
+                <th>thead th2</th>
+                <th>thead th3</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- thead나 tfoot과 달리 여러 번 선언되어 행을 그룹화할 수 있다. -->
+            <tr>
+                <td>tbody td1</td>
+                <td>tbody td2</td>
+                <td>tbody td3</td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr> 
+                <td>tbody td1</td>
+                <td>tbody td2</td>
+                <td>tbody td3</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>tfoot td1</td>
+                <td>tfoot td2</td>
+                <td>tfoot td3</td>
+            </tr>
+        </tfoot>
+    </table>
+    <!-- 
+        table 요소를 도표의 의미가 아닌 용도에 쓰는 것, 그리고 Table 레이아웃으로 인해 HTML 문서안에 외형을 담고 있는 것은 웹 표준 위배된다.
+    -->
+</body>
+</html>
