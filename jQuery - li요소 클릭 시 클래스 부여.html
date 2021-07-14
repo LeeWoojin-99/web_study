@@ -23,6 +23,18 @@
             background: red;
         }
     </style>
+    <script>
+    </script>
+    <script>
+        $(document).ready(function(){ // 문서 로딩이 완료되면 실행
+            var target = $('#pp li');
+            target.on('click', function() {
+                target.removeClass('active'); // #pp의 모든 li의 active클래스를 제거
+                $(this).addClass('active');
+                // $(this) 이벤트가 발생한 요소
+            })
+        })
+    </script>
 </head>
 <body>
     <ul id="pp">
@@ -32,12 +44,5 @@
         <li>D</li>
         <li>E</li>
     </ul>
-    <script>
-        var target = $('#pp li');
-        target.on('click', function(){
-            target.removeClass('active');
-            $(this).addClass('active');
-        })
-    </script>
 </body>
 </html>
