@@ -1,0 +1,70 @@
+<!-- safe jQuery, selector context -->
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            text-align: center;
+        }
+        li{
+            display: inline-block;
+            width: 100px;
+            height: 50px;
+            background: gray;
+            line-height: 50px;
+            cursor: pointer;
+            transition: all 1s;
+        }
+        li.active{
+            background: red;
+        }
+    </style>
+    <script>
+        // $는 jQuery에서만 쓰는 기호가 아니기 때문에
+        // $를 사용하는 다른 라이브러리에서의 $와 충동할 가능성이 있다.
+        // 그렇기 때문에 $가 충동하지 않고 안전하게 jQuery를 사용할 수 있는 방법이 있다.
+
+        // $대신에 jQuery를 사용
+        // jQuery(element object | 'css style selector').method();
+
+        // $를 함수의 지역변수로 사용
+        // (function(a, b, c, ...){
+        //     ...
+        // })(a, b, c, ...)
+        // 선언과 동시에 실행한다.
+
+        jQuery(document).ready(function(){ // 문서 로딩이 완료되면 실행
+            (function($){
+                $(document.querySelector('ul#pp')).on('click', function(){
+                    // document.querySelector('qu#pp') : element object
+                    $('li', this).addClass('active');
+                    // $(selector, [context])
+                    // li : selector
+                    // this : context
+                    // on을 실행한 주체가 ul#pp이기 때문에 on의 안에서 쓰여진 this는 ul#pp를 의미한다.
+                    // $('li', this) : ul#pp의 자식 li요소를 의미한다.
+                })
+            })(jQuery)
+        })
+    </script>
+</head>
+<body>
+    <ul>
+        <li>a</li>
+        <li>b</li>
+        <li>c</li>
+    </ul>
+    <ul id="pp">
+        <li>A</li>
+        <li>B</li>
+        <li>C</li>
+        <li>D</li>
+        <li>E</li>
+    </ul>
+</body>
+</html>
