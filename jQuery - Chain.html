@@ -1,0 +1,41 @@
+<!-- jQuery Chain -->
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .a, .b{
+            width: 300px;
+            height: 300px;
+            opacity: 0.75;
+        }
+    </style>
+    <script>
+        jQuery(document).ready(function(){
+            // jQuery
+            var target = $('.a');
+            target.attr('data-index', 'jquery index').attr('data-target', 'jquery target').css('background-color', 'blue');
+            // jquery에서는 javascript와는 다르게 메서드를 체인처럼 연속적으로 사용할 수 있다.
+            console.log(target.data('index')); // data속성을 사용할 때에는 'data-'는 빼고 뒤의 것만 적어서 사용한다.
+            console.log(target.data('target'));
+
+            // javascript의 DOM을 이용
+            var target = document.querySelector('.b');
+            target.setAttribute('data-index', 'javascript index');
+            target.setAttribute('data-target', 'javascript target');
+            target.style.backgroundColor = 'red';
+            // javascript는 jquery처럼 한 줄로 연속적인 동작을 구현할 수 없어 한 동작마다 한 줄로 코딩한다.
+            console.log(target.dataset.index); // dataset.이름 으로 읽어낼 수 있다.
+            console.log(target.dataset.target);
+        })
+    </script>
+</head>
+<body>
+    <div class="a"></div>
+    <div class="b"></div>
+</body>
+</html>
