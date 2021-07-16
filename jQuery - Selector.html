@@ -1,0 +1,66 @@
+<!-- jQuery Selector -->
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            text-align: center;
+        }
+        li{
+            display: inline-block;
+            width: 100px;
+            height: 50px;
+            background: gray;
+            line-height: 50px;
+            cursor: pointer;
+            transition: all 1s;
+        }
+        li.active{
+            background: red;
+        }
+    </style>
+    <script>
+        jQuery(document).ready(function(){
+            // $('ul#lwj_id li').addClass('active'); // 아이디 선택
+            // $('li.lwj_class_1, li.lwj_class_2').addClass('active'); // 클래스 선택
+            // $('li.lwj_class_1, li.lwj_class_2').addClass('active'); // 다중 선택
+
+            // $('ul#lwj_id li:eq(2)').addClass('active');
+            // eq(x) : x와 같은
+            // gt(x) : x보다 큰
+            // lt(x) : x보다 작은
+            // even : 짝수
+            // odd : 홀수
+            // first : 첫 번째
+            // last : 마지막
+            // li가 아닌 다른 원소에도 사용할수 있는 선택 옵션이다.
+
+            // $('li[data-target="target_2"]').addClass('active');
+            // 대괄호를 이용하여 알맞는 속성의 값을 가진 요소를 찾을 수 있다.
+            // *= : 포함한
+            // != : 속성값이 해당 값이 아닌 (포함하지 않은 것을 선택하는 뜻이 아님)
+            // ^= : 해당 값을 처음으로 시작하는
+            // $= : 해당 값을 마지막으로 하는
+            // $('li[data-target="target_2"][class="lwj_class_2"]').addClass('active'); // 대괄호를 여러 개 사용할 수 있다.
+            // $('li[data-target]').addClass('active'); // 해당 속성 값이 존재하는
+
+            // 이외에도 다양한 선택자들이 존재한다.
+        })
+    </script>
+</head>
+<body>
+    <ul id="lwj_id">
+        <li class="lwj_class_1" data-target="target_1">1</li>
+        <li class="lwj_class_2" data-target="target_2">2</li>
+        <li >3</li>
+        <li >4</li>
+        <li >5</li>
+        <li >6</li>
+    </ul>
+</body>
+</html>
