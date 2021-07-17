@@ -1,0 +1,59 @@
+<!-- jQuery Event -->
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        input{
+            width: 200px;
+            height: 100px;
+            font-size: 20px;
+            background-color: lavender;
+        }
+    </style>
+    <script>
+        // jQuery(document).on('ready', function(){})
+
+        // event : 시스템에서 일어하는 사건을 의미한다.
+        // javascript, jQuery에게 이벤트란 브라우저에서 일어나는 사건을 의미한다.
+        
+        // 특정 요소에서 발생하는 이벤트를 처리하기 위해서는 이벤트 핸들러(event handler)라는 함수를 작성하여 연결해야만 한다.
+        // 이벤트 핸들러가 연결된 특정 요소에서 지정된 타입의 이벤트가 발생하면, 웹 브라우저는 연결된 이벤트 핸들러를 실행한다.
+
+        // 작성된 이벤트 핸들러를 특정 요소에 연결하는 것을 이벤트의 연결(event binding)이라고 한다.
+
+        jQuery(document).ready(function(){
+            function click_handler(e){
+                alert("clicked");
+            }
+            $('#click').on('click', click_handler);
+            //$('#click').on({click: click_handler});
+            // on(이벤트 타입, 이벤트 핸들러)
+            // 지정한 타입의 이벤트에 대한 이벤트 핸들러를 특정 요소에 연결하는 메서드 on()
+            $('#click_event_off').on('click', function(){
+                $('#click').off('click', click_handler);
+                // 특정 요소에 연결된 이벤트 핸들러를 연결을 해제하는 메서드 off()
+            })
+            $('#click_event_on').on('click', function(){
+                $('#click').on('click', click_handler);
+            })
+            $('#click_trigger').on('click', function(){
+                $('#click').trigger('click');
+                // 이벤트를 발생시키는 메서드 trigger()
+            })
+        })
+
+        // 존재하지 않는 엘리먼트에도 이벤트 핸들러를 연결할 수 있다.
+    </script>
+</head>
+<body>
+    <input type="button" id="click" value="click btn">
+    <input type="button" id="click_event_off" value="click event off btn">
+    <input type="button" id="click_event_on" value="click event on btn">
+    <input type="button" id="click_trigger" value="click trigger btn">
+</body>
+</html>
