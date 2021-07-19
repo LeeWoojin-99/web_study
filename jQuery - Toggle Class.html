@@ -1,0 +1,46 @@
+<!-- jQuery Toggle Class -->
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .lwj{
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 500px;
+            height: 500px;
+
+            background: rgba(0, 0, 0, 0.7);
+            cursor: pointer;
+
+            opacity: 0;
+            visibility: hidden;
+            transition: all 1s ease;
+        }
+        .active{
+            visibility: visible;
+            opacity: 1;
+        }
+        input{
+            margin-left: 600px;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            $('input[value="toggle button"]').on('click', function(){
+                $('.lwj').toggleClass('active');
+            })
+        })
+    </script>
+</head>
+<body>
+    <div class="lwj"></div>
+    <input type="button" value="toggle button">
+</body>
+</html>
