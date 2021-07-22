@@ -1,0 +1,70 @@
+<!-- jQuery Form -->
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            $("input[type='text']").on({
+                focus:function(){
+                    $(this).next("span").html("focus");
+                    // html : 해당 element의 contents값으로 "focus"를 준다.
+                },
+                blur:function(){
+                    $(this).next("span").html("blur");
+                },
+                change:function(e){
+                    alert("change! "+$(e.target).val());
+                    // event가 발생한 대상의 정보를 지닌 객체 e
+                },
+                select:function(){
+                    $(this).next("span").html("select");
+                }
+                // event들에 대한 설명
+                // focus : input태그가 클릭되어 입력할 수 있는 상태
+                // blur : input태그가 아닌 곳이 클릭되어 입력할 수 없는 상태
+                // change : input태그의 value값이 바뀐 상태
+                // select : input태그의 value값이 선택(드래그)된 상태
+            })
+
+            // event chaining을 다른 형태로 구현한 모습
+            // $("input[type='text']").focus(function(){
+            //     $(this).next("span").html("focus");
+            // }).blur(function(){
+            //     $(this).next("span").html("blur");
+            // }).chagne(function(e){
+            //     alert("change! "+$(e.target).val());
+            // }).select(function(){
+            //     $(this).next("span").html("select");
+            // })
+
+            $("form").submit(function(){
+                // submit event가 발생되면 호출되는 이벤트 핸들러
+                if( $("input[type='text']").val() === "correct" ){ // type속성의 값이 text인 input태그의 value값이 correct가 맞다면
+                    $("span.result").text("Valid Data!").show(); // class속성의 값이 result이 span태그의 text값을 수정하여 보여준다.
+                    return true; // submit event에 대한 return값을 true로 하여 정상적인 동작이 되도록 한다.
+                }
+                $("span.result").text("Not Valid!").show().fadeOut(1000);
+                return false; // return값이 false라면 submit event에서는 form태그의 action속성의 값이 제대로 동작되지 않는다.
+            })
+        })
+    </script>
+</head>
+<body>
+    <form action="javascript:alert('success!')">
+        <!-- action : submit event가 발생하면 action의 동작을 수행한다. -->
+        <input type="text">
+        <span>span</span>
+        <br>
+        <input type="submit">
+        <!-- submit 버튼을 누르면 submit event가 발생 -->
+        <span class="result">result</span>
+    </form>
+</body>
+</html>
