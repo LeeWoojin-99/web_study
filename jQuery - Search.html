@@ -1,0 +1,108 @@
+<!-- jQuery Search -->
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        li{
+            list-style-type: none;
+        }
+
+        div, ul, li{
+            padding: 20px;
+            margin: 20px;
+            border: 2px solid black;
+        }
+        #root{
+            max-width: 800px;
+        }
+
+        .selected{
+            background-color: rgb(221, 151, 151);
+            border-color: rgb(83, 0, 218);
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+
+            // $('#root').addClass('selected');
+
+            // add(selector)
+            // $('#root').addClass('selected'); // 이렇게 하면 #root만 선택되지만
+            // $('#root').add('div').addClass('selected'); // 이렇게 하면 #root도 선택되며 add('ul')로 인하여 ul element도 선택된다.
+
+            // children([selector])
+            // $('#root').children().addClass('selected'); // #root의 자식 요소를 선택
+            // children('div>ul') 이렇게 >ul을 붙이면 사용이 안된다.
+            // $('#root').children('div').children('ul').addClass('selected'); // #root의 자식 div요소의 자식 ul요소를 선택
+            // $('#root').find('ul').addClass('selected'); // find로 한 줄 위의 문장과 같은 기능을 하는 문장을 작성해보았다.
+            // children과 find의 차이점 : children은 한 단계 아래의 자식을 검색하지만 find는 모든 자식을 검색한다.
+
+            // end()
+            // $('#root').children('div').children('ul').end().addClass('selected');
+
+            // 1. #root
+            // 2. 1번의 자식 요소 중에서 div요소
+            // 3. 2번의 자식 요소 중에서 ul요소
+            // end()를 통하여 3번에서 2번으로 거슬러 올라갔다.
+
+            // filter(selctor)
+            // $('li').filter(':eq(2)').addClass('selected');
+            // 선택되어 있는 li요소들 중에서 필터의 값으로 주어진 ':eq(2)'에 알맞는 요소만 선택되었다.
+
+            // find(selector)
+            // $('ul').find('li').addClass('selected');
+            // 선택되어 있는 ul요소의 자식에서 find의 값으로 주어진 li요소를 찾아서 선택한다.
+
+            // next()
+            // $('li').filter(':first').next().addClass('selected');
+            // li요소 중에서 첫 번째 li요소가 선택되었는데 next()로 인하여 두 번째 li요소를 선택하였다.
+
+            // sibling()
+            // $('#root').children().first().addClass('selected'); // #root의 자식 div요소들 중에서 첫 번째 div요소만 선택된 상태
+            // $('#root').children().first().siblings().addClass('selected'); // 선택되어 있던 자신 요소를 제외한 다른 형재 요소를 전부 선택
+
+            // slice(start, [end])
+            // $('li').slice(1, 3).addClass('selected'); // 1, 2 index의 li요소를 선택
+
+            // add(selector) : 엘리먼트를 추가로 선택
+            // children([selector]) : 자식 엘리먼트를 선택
+            // each(function(index, Element)) : 현재 엘리먼트 셋에 반복 작업을 실행
+            // end() : 이전 체인 컨텍스트로 돌아간다.
+            // eq(index) : 현재 엘리먼트 셋에서 index에 해당하는 엘리먼트를 선택
+            // filter(selector) : 현재 엘리먼트 셋에서 selector에 해당하는 엘리먼트를 선택
+            // find(selector) : 현재 엘리먼트 셋에서 selector에 해당하는 자손 엘리먼트를 선택
+            // first() : 현재 엘리먼트 셋 중 첫 번째 엘리먼트를 선택
+            // last() : 현재 엘리먼트 셋 중 마지막 엘리먼트를 선택
+            // next() : 각각의 엘리먼트에 대한 다음 형재 엘리먼트를 선택
+            // nextAll() : 각각의 엘리먼트에 대한 다음 형재 엘리먼트를 전부 선택
+            // prev() : 각각의 엘리먼트에 대한 이전 형재 엘리먼트를 선택
+            // prevAll() : 각각의 엘리먼트에 대한 이전 형재 엘리먼트를 전부 선택
+            // siblings() : 각각의 엘리먼트에 대한 형재 엘리먼트를 전부 선택
+            // slice(start, [end]) : 현재 엘리먼트 셋 중 start에서 end까지의 엘리먼트를 선택
+        })
+    </script>
+</head>
+<body>
+    <div id="root">
+        root div
+        <div>div</div>
+        <div>
+            div
+            <ul>
+                ul
+                <li>li</li>
+                <li>li</li>
+                <li>li</li>
+                <li>li</li>
+            </ul>
+        </div>
+        <div>div</div>
+    </div>
+    <div>div</div>
+</body>
+</html>
