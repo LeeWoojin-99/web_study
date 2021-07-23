@@ -1,0 +1,58 @@
+<!-- jQuery Animation 1 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #target{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            $("input[type='button']").click(function(e){
+                var button_id = $(this).attr("id");
+                // this.attr("id")로는 사용할 수 없고
+                // $(this).attr("id")로 사용해야 정상적인 결과를 얻을 수 있다.
+                var target = $("#target");
+                switch(button_id){
+                    case "fade_out":
+                        target.fadeOut(1000);
+                        break;
+                    case "fade_in":
+                        target.fadeIn(1000);
+                        break;
+                    case "hide":
+                        target.hide();
+                        break;
+                    case "show":
+                        target.show();
+                        break;
+                    case "slide_down":
+                        target.slideDown(1000);
+                        break;
+                    case "slide_up":
+                        target.slideUp(1000);
+                        break;
+
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <input type="button" id="fade_out" value="fade out">
+    <input type="button" id="fade_in" value="fade in">
+    <input type="button" id="hide" value="hide">
+    <input type="button" id="show" value="show">
+    <input type="button" id="slide_down" value="slide down">
+    <input type="button" id="slide_up" value="slide up">
+    <div id="target"></div>
+</body>
+</html>
