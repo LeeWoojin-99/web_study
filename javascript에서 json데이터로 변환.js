@@ -23,3 +23,7 @@ console.log("filter\n"+JSON.stringify(js_object, filter));
 // stringify 메소드의 두 번째 인수값을 함수로 줄 수 있다.
 // 첫 번째 인수값들이 두 번째 인수값을 거친 값을
 // JSON형식의 문자열로 변환한 값을 리턴한다.
+
+// JSON.parse() : JSON 데이터를 javascript 데이터로 변환
+console.log("\nJSON.parse() : " + JSON.parse(json_object));
+console.log("JSON 데이터에서 javascript 데이터로 변환한 것의 속성 호출 : " + JSON.parse(json_object).name);
