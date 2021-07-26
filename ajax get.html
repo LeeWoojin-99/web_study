@@ -1,0 +1,45 @@
+<!-- XMLHttpRequest -->
+<!-- 
+    Ajax
+    Asynchronous JavaScript and XML
+    Ajax는 자바스크립트를 이용하여 비동기적으로 서버와 브라우저가 데이터를 교환할 수 있는 통신 방식이다.
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+    <script>
+        
+        var xhr = new XMLHttpRequest(); // ajax 요청을 하기 위한 객체 생성
+
+        xhr.onreadystatechange = function(){
+            // onreadystatechange : readyState의 값이 변함에 따라 자동으로 호출되는 콜백함수
+            if (xhr.readyState === 4){ // 4 : COMPLETE : 데이터를 전부 받은 상태
+                if (xhr.status === 200){ // 200 : OK : 요청 성공
+                    $("p").html(JSON.parse(xhr.responseText).key);
+                    // responseText : 서버로부터 응답받은 데이터를 텍스트로 받아온다.
+                    // JSON.parse(x) : json 데이터 x를 javascript 데이터로 변환
+                }
+            }
+        }
+
+        xhr.open("GET", "./ajax get json.json", true);
+        // open(HTTP method, url, async)
+        // HTTP method : "GET", "POST", "HEAD" 중 하나의 방식으로 설정
+        // 접속할 URL 입력. 보안상의 이유(동일 출처 원칙)으로 현재 페이지와 같은 도메인에 있어야 한다.
+        // async : 비동기/동기 방식을 설정 (true일 경우 비동기)
+
+        xhr.send();
+        
+    </script>
+</head>
+<body>
+    <p></p>
+</body>
+</html>
