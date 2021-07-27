@@ -1,0 +1,52 @@
+<!-- 
+    ajax 방식으로 서버와 통신하여 비동기적으로 웹페이지의 정보를 바꾼다.
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        li{
+            cursor: pointer;
+        }
+        #contents{
+            width: 500px;
+            background: rgba(204, 85, 85, 0.2);
+        }
+    </style>
+    <script>
+        $(document).ready(() => {
+            $("#list").children("li").on("click", function(){
+
+                var li_index = $("#list").children("li").index(this) +1; // .open()에서 url을 나타내기 위해 index값을 변수에 담아 사용한다.
+
+                // ajax 통신에 대한 부분
+                var ajax = new XMLHttpRequest();
+                ajax.open("get", "ajax - li click_" + li_index + ".html", true);
+                ajax.onreadystatechange = function(){
+                    if(ajax.readyState === 4){
+                        if(ajax.status === 200){
+                            $("#contents").html(ajax.responseText);
+                        }
+                    }
+                }
+                ajax.send();
+            })
+        })
+        
+    </script>
+</head>
+<body>
+    <h1>WEB</h1>
+    <ul id="list">
+        <li>1. HTML</li>
+        <li>2. CSS</li>
+        <li>3. JavaScript</li>
+    </ul>
+    <p id="contents"></p>
+</body>
+</html>
