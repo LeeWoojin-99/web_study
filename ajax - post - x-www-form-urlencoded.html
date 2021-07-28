@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+    <script>
+        $(document).ready(() => {
+            var ajax = new XMLHttpRequest();
+            url = "ajax - post php - x-www-form-urlencoded.php";
+            ajax.open('POST', url, true);
+
+            // ajax.setRequestHeader("Content-type", "application/json");
+            ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            // 클라이언트가 서버로 전송할 데이터의 MIME-type 지정
+            
+            ajax.onreadystatechange = function(){
+                if (this.readyState === 4){
+                    if (this.status === 200){
+                        var php_data = JSON.parse(this.responseText);
+                        // console.log(this.responseText);
+                        console.log(JSON.parse(this.responseText));
+                        $("p").html(php_data.name + "<br>" + php_data.age);
+                        // 서버로부터 받은 json데이터를 javascript 데이터로 변환하여 p태그에 입력
+                    }
+                }
+            }
+
+            var send_data = "name=abc&age=23";
+            // send_data = JSON.stringify(send_data);
+            // console.log("send_data : "+send_data);
+            ajax.send(send_data); // json 데이터를 전송
+        })
+    </script>
+</head>
+<body>
+    <h1>ajax post</h1>
+    <p></p>
+</body>
+</html>
