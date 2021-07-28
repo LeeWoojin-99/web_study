@@ -15,16 +15,14 @@
             url = "ajax - post php - x-www-form-urlencoded.php";
             ajax.open('POST', url, true);
 
-            // ajax.setRequestHeader("Content-type", "application/json");
             ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             // 클라이언트가 서버로 전송할 데이터의 MIME-type 지정
             
             ajax.onreadystatechange = function(){
                 if (this.readyState === 4){
                     if (this.status === 200){
-                        var php_data = JSON.parse(this.responseText);
-                        // console.log(this.responseText);
-                        console.log(JSON.parse(this.responseText));
+                        var php_data = JSON.parse(this.responseText); // 서버로부터 응답받은 데이터가 json 데이터이기 때문에 javascript 데이터로 변환
+                        console.log(php_data); // 서버로부터 받아온 데이터를 확인하기 위한 출력문
                         $("p").html(php_data.name + "<br>" + php_data.age);
                         // 서버로부터 받은 json데이터를 javascript 데이터로 변환하여 p태그에 입력
                     }
@@ -32,9 +30,17 @@
             }
 
             var send_data = "name=abc&age=23";
-            // send_data = JSON.stringify(send_data);
-            // console.log("send_data : "+send_data);
-            ajax.send(send_data); // json 데이터를 전송
+            // php 웹 서버에 보낼 데이터
+            // 객체의 =으로 key값과 value값이 구분되며
+            // &으로 key-value의 한 쌍이 구분된다.
+
+            // send_data = JSON.stringify({name:"lwj", age:23});
+            // json 데이터로 보내면 {"name":"lwj", "age":23}: key값만 있고 value값이 없는 객체 데이터가 전송된다.
+            // 그래서 php에서 받은 데이터는 value데이터가 없으므로 $_POST["~~~"]으로 데이터를 불러낼 수 없어서
+            // 불러낼 경우 선언되지 않은 배열의 key라는 오류가 발생한다.
+            
+            console.log("send_data : "+send_data); // 데이터를 확인하기 위한 출력문
+            ajax.send(send_data);
         })
     </script>
 </head>

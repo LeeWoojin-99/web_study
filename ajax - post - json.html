@@ -1,0 +1,47 @@
+<!-- ajax방식으로 서버와 통신하여 데이터를 받아오는 코드
+json 데이터를 보내서 json데이터를 받아올 것이다. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+    <script>
+        $(document).ready(() => {
+            var ajax = new XMLHttpRequest();
+            url = "ajax - post php - json.php";
+            ajax.open('POST', url, true);
+
+            ajax.setRequestHeader("Content-type", "application/json");
+            // 클라이언트가 서버로 전송할 데이터의 MIME-type 지정
+            
+            ajax.onreadystatechange = function(){
+                if (this.readyState === 4){
+                    if (this.status === 200){
+                        var response_data = this.responseText;  // 서버로부터 받아온 데이터
+                        console.log(response_data); // json 데이터라서 string 자료형이다.
+
+                        response_data = JSON.parse(response_data); // 서버로부터 받아온 json 데이터를 javascirpt 데이터로 변환
+                        console.log(response_data); // javascript 데이터로 변환하니 object 자료형으로 바뀌었다.
+                        
+                        $("p").html(response_data.name + "<br>" + response_data.age);
+                    }
+                }
+            }
+
+            var send_data = {name:"abc", age:123}; // javascript 객체를 생성
+            send_data = JSON.stringify(send_data); // javascript 객체를 json 데이터로 변환
+            console.log("send_data : " + send_data);
+            ajax.send(send_data); // json 데이터를 전송
+        })
+    </script>
+</head>
+<body>
+    <h1>ajax post</h1>
+    <p></p>
+</body>
+</html>
