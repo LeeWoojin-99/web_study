@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html{
+            padding: 30px;
+        }
+        ol{
+            margin-left: 30px;
+        }
+        li{
+            margin-top: 5px;
+            font-size: 26px;
+        }
+        ol li a{
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function fetchPage(fileName){
+            fetch(fileName).then(function(responseData){
+                responseData.text().then(function(text){
+                    $("article").html(text);
+                })
+            })
+        }
+    </script>
+    <script>
+        $(document).ready(function(){
+            
+            $("ol li a").click(function(){
+                var index = $("ol li a").index(this) + 1;
+                fetchPage("fetch - 텍스트 가져오기 html_" + index + ".html");
+            })
+
+        })
+    </script>
+</head>
+<body>
+    <h1>WEB</h1>
+    <ol>
+        <li><a>HTML</a></li>
+        <li><a>CSS</a></li>
+        <li><a>JavaScript</a></li>
+    </ol>
+    <article style="margin-top: 50px;">내용이 들어갈 공간</article>
+</body>
+</html>
