@@ -1,0 +1,86 @@
+<!-- 
+    HashBang
+    Hash : #
+    Bang : !
+    ajax를 통하여 서버에서 가져온 정보들을 한 개의 웹 페이지에 표현했을 때 url은 그대로이기 때문에 페이지를 새로고침하게 되면 ajax를 통하여 가져온 정보들이 날아가게 된다.
+    새로고침을 하여도 정보를 유지시키기 위해 url에 ajax를 통해 가져오는 정보에 대한 정보를 담기 위한 것이 HashBang이다.
+    SPA는 페이지가 갱신되지 않는 것이 중요한데 현재 페이지의 기술로는 페이지의 갱신 없이 URL을 변경할 수 있는 방법이 없습니다.
+    URL을 변경해야 하는 이유는 URL을 변경해야 다른 곳에서 같은 화면의 페이지로 접근이 가능하기 때문입니다.
+    그렇기 때문에 페이지의 갱신 없이 URL이 변경되는 것처럼 보이도록 하기 위해서 해쉬뱅을 사용하는 것이다.
+    
+    Hash
+    링크가 #x인 것을 클릭했을 경우 id값이 x인 요소가 있는 곳으로 페이지의 위치를 이동시킨다.
+    그리고 url뒤에는 #x가 추가된다.
+    이처럼 #는 링크에서 사용될 경우 이정표와 같은 역할을 한다. HTML 앵커기능을 이용한 것이다.
+
+    Hash를 SPA의 ajax를 위해서 사용
+    url뒤에 해쉬가 추가되는 것을 SPA에서는 ajax를 사용했을 때 페이지의 변화를 기억하기 위해서 사용하였다.
+    SPA(single page application)에서는 url에 해쉬를 사용하여 ajax가 어떠한 정보를 가져온 상태의 페이지인 것을 표현하였다.
+    그런데 우리는 SPA를 위해서 #를 사용하는 것인데 HTML 앵커기능을 사용하기 위한 #와 같아보이니 이를 방지하기 SPA를 위해서 사용하는 #의 다음에는 !를 붙여서 #!(해쉬뱅)으로 사용한다.
+
+    해쉬뱅 사용 방법
+    location.hash
+    해쉬 뒤에 붙은 fragment identifier을 반환해준다.
+    그리고 substr(start, [end])를 이용하여 사용할 것만 때서 사용한다.
+
+ -->
+ <!-- fetch - 텍스트 가져오기 main.html과 같이 사용되었던 fetch - 텍스트 가져오기 html_1.html 외 2개의 파일을 사용하였습니다. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html{
+            padding: 30px;
+        }
+        ol{
+            margin-left: 30px;
+        }
+        li{
+            margin-top: 5px;
+            font-size: 26px;
+        }
+        ol li a{
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function fetchPage(fileName){
+            fetch(fileName).then(function(responseData){
+                responseData.text().then(function(text){
+                    $("article").html(text);
+                })
+            })
+        }
+    </script>
+    <script>
+        $(document).ready(function(){
+            
+            $("ol li a").click(function(){
+                var index = $("ol li a").index(this) + 1;
+                fetchPage("fetch - 텍스트 가져오기 html_" + index + ".html");
+            })
+
+            if(location.hash){
+                fetchPage(location.hash.substr(2));
+            }
+
+        })
+    </script>
+</head>
+<body>
+    <h1>WEB</h1>
+    <ol>
+        <li><a href="#!fetch - 텍스트 가져오기 html_1.html">HTML</a></li>
+        <li><a href="#!fetch - 텍스트 가져오기 html_2.html">CSS</a></li>
+        <li><a href="#!fetch - 텍스트 가져오기 html_3.html">JavaScript</a></li>
+    </ol>
+    <article style="margin-top: 50px;">내용이 들어갈 공간</article>
+</body>
+</html>
