@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html{
+            padding: 30px;
+        }
+        ol{
+            margin-left: 30px;
+        }
+        li{
+            margin-top: 5px;
+            font-size: 26px;
+        }
+        ol li a{
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function fetchPage(fileName){
+            fetch(fileName).then(function(responseData){
+                // 요청을 보내서 응답을 받는 것을 성공했을 때에 function(responseData){...}가 호출된다.
+                responseData.text().then(function(text){
+                    // responseData.text() : 응답받은 데이터 responseData.text()에서 글자를 추출한다.
+                    // 글자를 추출하는 text()가 성공적으로 동작되었을 때 function(text){...}가 호출된다.
+                    $("article").html(text);
+                })
+            })
+        }
+    </script>
+    <script>
+        $(document).ready(function(){
+            
+            // list를 구성하는 작업
+            var list;
+            fetch("fetch - 생활코딩 ajax 강의 list.txt").then(function(responseData){
+                responseData.text().then(function(text){
+                    list = text.split(",");
+                    var tags = "";
+                    for(i of list){
+                        // <li><a href="#!fetch - 생활코딩 ajax 강의 HTML.html">HTML</a></li>
+                        // tags += "<li><a href='#!fetch - 생활코딩 ajax 강의 " + i + ".html'>" + i + "</a></li>"; // 태그 속성에 onclick을 안 쓸 때
+                        tags += '<li><a href="#!fetch - 생활코딩 ajax 강의 ' + i + '.html" onclick="fetchPage(\'fetch - 생활코딩 ajax 강의 ' + i + '.html\')">' + i + '</a></li>\n'; // 태그 속성에 onclick을 쓸 때
+                    }
+                    $("ol#list").html(tags);
+
+                    // ajax는 비동기적으로 동작되기 때문에 $("ol#list li a")가 생성되기 전에 이벤트 핸들러를 연결하면 없는 요소에 이벤트 핸들러를 연결하는 것이기 때문에 원활한 동작이 되지 않는다.
+                    // 그래서 태그의 속성에 onclick속성을 부여하는 것으로 해결하였다. 태그의 onclick속성을 부여하면 태그가 생성되면서 이벤트 핸들러가 연결되는 것이기 때문에 원활한 동작이 된다.
+                    // $("ol#list li a").on("click", function(){
+                    //     var name = $(this).text();
+                    //     console.log(name);
+                    //     fetchPage("fetch - 생활코딩 ajax 강의 " + name + ".html");
+                    // })
+
+                });
+            });
+
+            // if(location.hash){fetchPage(location.hash.substr(2));} // HashBang
+            // HashBang Code가 없다면 새로고침을 했을 때 ajax를 통하여 불러온 데이터들이 전부 날라간다.
+
+        })
+    </script>
+</head>
+<body>
+    <h1>생활코딩 ajax 강의</h1>
+    <div class="test"></div>
+    <ol id="list"></ol>
+    <article style="margin-top: 50px;">내용이 들어갈 공간</article>
+</body>
+</html>
