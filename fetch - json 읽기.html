@@ -1,0 +1,17 @@
+<!-- fetch를 통하여 json 데이터를 가져옴으로써 ajax를 구현 -->
+<!-- web browser가 사용되지 않으면 ajax를 구현할 수 없다. fetch()도 사용할 수 없다. js파일에서 fetch()를 사용했다가 동작이 안됐다. -->
+<!DOCTYPE html>
+<head>
+    <script>
+        fetch("fetch - json 읽기 json.json").then(function(response){
+            return response.json();
+        }).then(function(jsonData){
+            console.log(jsonData);
+            console.log("type : " + typeof jsonData); // javascript에서 배열은 오브젝트 자료형에 속한다.
+        })
+    </script>
+</head>
+<body>
+    <h1>WEB</h1>
+</body>
+</html>
