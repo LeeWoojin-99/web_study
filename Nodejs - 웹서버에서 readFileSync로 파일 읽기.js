@@ -1,4 +1,4 @@
-// 웹서버에서 file 읽기
+// 웹서버에서 readFileSync로 파일 읽기
 
 var http = require("http");
 var fs = require("fs");
