@@ -1,3 +1,5 @@
+// 웹서버에서 query string에 따라서 html 만들기
+
 var http = require("http");
 var fs = require("fs");
 var url = require("url");
@@ -18,7 +20,7 @@ var app = http.createServer(function(request, response){
     // response.end(fs.readFileSync(__dirname + _url));
     // fs.readFileSync(x) : x라는 파일을 읽어온다.
 
-    fs.readFile(`nodejs - file 읽기 ${queryData.id}.txt`, "utf8", function(err, description){
+    fs.readFile(`nodejs - ${queryData.id} Lorem.txt`, "utf8", function(err, description){
         var template = `
         <!--  -->
         <!DOCTYPE html>
