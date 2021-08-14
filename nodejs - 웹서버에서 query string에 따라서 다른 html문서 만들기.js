@@ -1,4 +1,4 @@
-// 웹서버에서 query string에 따라서 html 만들기
+// 웹서버에서 query string에 따라서 다른 html문서 만들기
 
 var http = require("http");
 var fs = require("fs");

@@ -1,4 +1,4 @@
-// 웹서버에서 query string 읽기
+// 웹서버에서 브라우저에서 요청한 query string 읽기
 
 var http = require("http");
 var url = require("url");
