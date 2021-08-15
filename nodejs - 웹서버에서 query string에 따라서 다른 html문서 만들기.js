@@ -1,5 +1,8 @@
 // 웹서버에서 query string에 따라서 다른 html문서 만들기
 
+// 브라우저에서 요청한 url의 query string을 객체의 형태로 추출하여
+// 추출한 값을 이용하여 파일을 읽어온다.
+
 var http = require("http");
 var fs = require("fs");
 var url = require("url");
