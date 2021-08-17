@@ -34,27 +34,29 @@ var app = http.createServer(function(request, response){
         `)
     }
 
+    function makeFileList(fileList){
+        var list = "";
+        for(i of fileList){
+            subject = i.split(" ")[2];
+            list += `<li><a href = "/?id=${subject}">${subject}</a></li>`
+        }
+        list += "</ul>\n";
+        return list
+    }
+
     if(pathName === "/"){ // 정상적인 요청을 받았을 때 응답하는 과정
         if(queryData.id === undefined){ // query string이 없는 url이라면 home page
             title = "Home Page";
             contents = "Hello Node.js";
             fs.readdir("./nodejs_subject_list", function(err, fileList){
-                for(i of fileList){
-                    subject = i.split(" ")[2];
-                    list += `<li><a href = "/?id=${subject}">${subject}</a></li>`
-                }
-                list += "</ul>\n";
+                list = makeFileList(fileList);
                 sendData(list, title, contents, response);
             })
         }else{
             title = queryData.id;
             fs.readFile(`./nodejs_subject_list/nodejs - ${queryData.id} Lorem.txt`, "utf8", function(err, description){
                 fs.readdir("./nodejs_subject_list", function(err, fileList){
-                    for(i of fileList){
-                        subject = i.split(" ")[2];
-                        list += `<li><a href = "/?id=${subject}">${subject}</a></li>`
-                    }
-                    list += "</ul>\n";
+                    list = makeFileList(fileList);
                     sendData(list, title, description, response);
                 })
             })
