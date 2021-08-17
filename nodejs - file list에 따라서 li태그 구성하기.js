@@ -34,7 +34,7 @@ var app = http.createServer(function(request, response){
         `)
     }
 
-    function makeFileList(fileList){
+    function makeFileList(fileList){ // 이름들이 담긴 배열을 인수값으로 받아서 ul태그와 각 이름에 알맞는 li태그들을 구성하는 함수
         var list = "";
         for(i of fileList){
             subject = i.split(" ")[2];
