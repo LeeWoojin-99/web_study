@@ -74,6 +74,10 @@ var app = http.createServer(function(request, response){
             <input type="submit">
         </form>
         `;
+        // form tag의 type이 submit인 input tag를 누르면
+        // form tag의 action속성의 값으로 데이터를 전송한다.
+        // 데이터 전송 방식은 POST방식으로 하였다.
+        // 전송된 데이터가 어떻게 받아지는 지, 어떻게 다룰 것인지는 'nodejs - 생성된 글 데이터를 서버에서 받기.js'에서 알아보도록 하자.
         fs.readdir("./nodejs_subject_list", function(err, fileList){
             list = makeFileList(fileList);
             response.writeHead(200);
