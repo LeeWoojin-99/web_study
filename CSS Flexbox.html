@@ -43,9 +43,18 @@
             text-align: center;
             line-height: 200px;
             font-size: 100px;
+
+            /* flex: 1; */
+            /* container에서의 item의 중심 축에서의 비율을 정하는 속성 */
+            /* flex속성의 값이 각각 1, 1, 2인 item이 있다면 1/4, 1/4, 2/4의 비율의 길이를 가진다. */
         }
         .item:nth-child(3){
             order: 2;
+            /* item의 순서를 정하는 속성 */
+            /* 기본 값은 0으로 설정되어 있다. */
+            align-self: flex-end;
+            /* container에서의 align-items속성을 item에 따로 적용하는 align-self 속성 */
+            /* align-container속성은 앞서지 못한다. */
         }
         .item:nth-child(4){
             order: 1;
