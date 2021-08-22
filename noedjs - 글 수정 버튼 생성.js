@@ -1,6 +1,6 @@
-// noedjs - 글 수정 UI 생성
+// noedjs - 글 수정 버튼 생성
 // templateHTML의 인자값으로 control을 추가
-// create, update UI가 control에 담기도록 수정
+// create, update 버튼이 control에 담기도록 수정
 
 var http = require("http");
 var fs = require("fs");
