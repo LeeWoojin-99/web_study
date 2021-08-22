@@ -1,0 +1,86 @@
+<!-- CSS menu hover effects -->
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            display: flex;
+            /* item을 가운데로 옮기기 위해서 body를 flexbox로 설정 */
+            justify-content: center;
+            align-items: center;
+
+            height: 100vh;
+            background: #490909;
+        }
+        ul{
+            display: flex;
+            /* li태그들을 가로로 쌓기 위해서 flexbox로 설정 */
+        }
+        ul li{
+            list-style: none;
+            margin: 0 20px;
+            /* li들의 간격을 늘리기 위한 margin 속성 */
+        }
+        ul li a{
+            display: block;
+            position: relative;
+            padding: 10px;
+
+            text-decoration: none;
+            font-size: 18px;
+            font-family: sans-serif;
+            color: #fff;
+
+            transition: 0.5s;
+        }
+        ul:hover li a{
+            /* 메뉴에 마우스를 올리면 크기가 커지며 불투명해지고 흐려진다. */
+            transform: scale(1.5);
+            opacity: 0.2;
+            filter: blur(5px);
+        }
+        ul:hover li a:hover{
+            /* 메뉴 중에서 마우스가 올라간 항목의 크기가 커지며 선명해진다. */
+            transform: scale(2);
+            opacity: 1;
+            filter: blur(0);
+        }
+        ul li a:before{
+            /* 마우스가 올라간 항목의 배경에 효과를 주기 위해서 배경을 before로 따로 제작 */
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: #ff497c;
+
+            transition: 0.5s;
+            transform-origin: right;
+            /* 효과가 시작되는 위치를 오른쪽으로 설정 */
+            transform: scaleX(0);
+            /* 안보이다가 마우스를 올리면 보이게 할 예정 */
+            
+            z-index: -1;
+            /* 배경을 before을 통하여 따로 제작한 것이기 때문에 a 태그의 뒤로 가도록 z-index를 -1로 설정 */
+        }
+        ul li a:hover:before{
+            /* 마우스가 올라가면 크기가 정상으로 */
+            transform: scaleX(1);
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a href="">가나</a></li>
+        <li><a href="">다라</a></li>
+        <li><a href="">마바</a></li>
+        <li><a href="">사아</a></li>
+        <li><a href="">자차</a></li>
+        <li><a href="">카타</a></li>
+        <li><a href="">파하</a></li>
+    </ul>
+</body>
+</html>
