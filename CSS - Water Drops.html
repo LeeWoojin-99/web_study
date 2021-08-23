@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Drawing | Water Drops</title>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    /* 가운데 정렬을 위한 flexbox 설정 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    background-color: #edeeed;
+}
+.drops{
+    position: relative;
+
+    /* 가운데 정렬을 위한 flexbox 설정 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.drop{
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: transparent;
+    /* 배경색을 투명으로 설정 */
+    border-radius: 52% 48% 60% 40% / 41% 34% 66% 59% ;
+    /* https://9elements.github.io/fancy-border-radius */
+    /* 위 링크에서 물방울 모양을 만들 수 있다. */
+    box-shadow: inset 10px 10px 10px rgba(0, 0, 0, 0.05),
+                15px 25px 10px rgba(0, 0, 0, 0.13),
+                inset -10px -10px 15px rgba(255, 255, 255, 0.9);
+    /* 안쪽 검정색, 바깥쪽 검정색, 안쪽 흰색을 box-shadow로 표현하여 물방울의 질감을 표현 */
+}
+
+/* before, after를 이용하여 물방울 안쪽의 하얀 광택을 표현 */
+.drop::before{
+    content: "";
+    position: absolute;
+    top: 25px;
+    left: 35px;
+    background-color: #fff;
+    width: 20px;
+    height: 20px;
+    border-radius: 59% 41% 62% 38% / 53% 42% 58% 47% ;
+}
+.drop::after{
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 65px;
+    background-color: #fff;
+    width: 10px;
+    height: 10px;
+    border-radius: 44% 56% 38% 62% / 53% 54% 46% 47% ;
+}
+
+/* 크기(scale), 위치(translate), 테두리 모양(border-radius)을 설정하여 다른 모양의 물방울을 만들 수 있다. */
+.drop:nth-child(2){
+    transform: scale(0.5) translate(-240px, 180px);
+    border-radius: 42% 58% 44% 56% / 56% 62% 38% 44% ;
+}
+.drop:nth-child(3){
+    transform: scale(0.3) translate(440px, 20px);
+    border-radius: 55% 45% 48% 52% / 59% 40% 60% 41% ;
+}
+.drop:nth-child(4){
+    transform: scale(0.2) translate(-480px, -300px);
+    border-radius: 49% 51% 60% 40% / 43% 43% 57% 57% ;
+}
+</style>
+</head>
+<body>
+    <!-- .drops.drop -->
+    <div class="drops">
+        <div class="drop"></div>
+        <div class="drop"></div>
+        <div class="drop"></div>
+        <div class="drop"></div>
+    </div>
+</body>
+</html>
