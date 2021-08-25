@@ -1,5 +1,6 @@
 // noedjs - CSS파일 적용
 // css파일을 적용
+// nodejs - 객체로 정리된 template을 모듈로 정리하기.js의 다음 단계
 
 var http = require("http");
 var fs = require("fs");
