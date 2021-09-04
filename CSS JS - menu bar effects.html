@@ -50,10 +50,10 @@ ul li a ion-icon{
 	opacity: 0.25;
 	transition: 0.7s;
 }
-/* ul li.active a ion-icon{
-	opacity: 1;
+ul li.active a ion-icon{
+	opacity: 0.7;
 	backdrop-filter: blur(15px);
-} */
+}
 #marker{
 	position: absolute;
 	top: 0;
@@ -148,12 +148,21 @@ ion-icon{
 		liTags.on("mouseover", function(){
 			moveIndicator(this);
 		})
+
 		// this가 아닌 e.target을 사용할 때 문제가 발생한다. 문제는 아래 설명과 같다.
 		// li > a > ion-icon
 		// a태그에 마우스를 올리면 이벤트가 발생해야 한다. 그런데 a태그의 안에 있는 ion-icon태그에 마우스가 올라가면 a태그 이벤트가 인식되지 않아서 이벤트핸들러가 호출되지 않는다.
 		// liTags.on("mouseover", function(e){
 		// 	moveIndicator(e.target);
 		// })
+		// e.target으로 사용해도 해결할 수 있는 방법들
+		// 방법 1 : CSS속성 중에서 pointer-events: none;
+		// 방법 2: stopPropagation();
+        // $("ion-icon").on("mouseover", function(e){
+        //     e.stopPropagation();
+        // })
+        // 버블링(bubbling) : ion-icon태그의 이벤트가 발생하였을 때 해당 이벤트가 더 상위의 요소들로 전달되는 것
+        // stopPropagation()을 통하여 이벤트가 발생한 요소로부터 상위 요소로 이벤트가 전파되는 것을 막을 수 있다.
 
 		// // 마우스가 올라가진 li태그에 active클래스를 부여하는 작업
 		function active(){
