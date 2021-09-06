@@ -3,6 +3,11 @@
 // template 객체의 내용을 js파일에 두고 해당 내용을 그 js파일의 module.exports에 넣어서 모듈화 시키고
 // 이 파일에서 모듈화시킨 파일을 불러와서 사용한다.
 
+// noedjs - 0. 객체로 정리된 template을 모듈로 정리하기
+// 생활코딩 nodejs 강좌의 마지막 부분
+// 그리고 nodejs MySQL 강좌의 시작 부분
+// 에 쓰이는 web application code이다.
+
 var http = require("http");
 var fs = require("fs");
 var url = require("url");
