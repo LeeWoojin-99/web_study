@@ -5,7 +5,7 @@
 
 // template module에서 파일 목록을 생성하는 부분을 수정하였음
 // old : template.makeFileList()의 인수값으로 파일 목록이 담긴 arr을 주었음.
-// new : 인수값으로 파일명을 속성으로 가지는 객체가 담긴 arr을 주었음.
+// new : 인수값으로 파일명을 속성으로 가지는 객체가 담긴 arr을 주었음. ul>li>a태그의 href의 쿼리 스트링 id의 값을 파일명이 아닌 id값(topic테이블의 id열의 값)으로 변경
 // tempalte module에서 객체에서 속성을 불러와서 파일명을 읽도록 수정하였다.
 
 var http = require("http");
