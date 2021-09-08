@@ -37,15 +37,19 @@ var app = http.createServer(function(request, response){
             title = "Home Page";
             contents = "Hello Node.js";
 
+            /*
             // file system code
-            // fs.readdir("./nodejs_data", function(err, fileList){
-            //     list = template.makeFileList(fileList); // 읽어온 파일 목록을 ul>li 태그로 구성한 문자열을 반환
-            //     response.writeHead(200); // 정상적인 서버의 응답임을 표시
-            //     response.end(template.html(list, title,
-            //         `<p>${contents}</p>`,
-            //         `<a href="./create">create page</a>`
-            //     )); // title, contents, list, control를 기반으로 html에 대한 template를 작성하여 전송
-            // })
+            title = "Home Page";
+            contents = "Hello Node.js";
+            fs.readdir("./nodejs_data", function(err, fileList){
+                list = template.makeFileList(fileList); // 읽어온 파일 목록을 ul>li 태그로 구성한 문자열을 반환
+                response.writeHead(200); // 정상적인 서버의 응답임을 표시
+                response.end(template.html(list, title,
+                    `<p>${contents}</p>`,
+                    `<a href="./create" class="controlBtn">Create</a>`
+                )); // title, contents, list, control를 기반으로 html에 대한 template를 작성하여 전송
+            })
+            */
 
             // MySQL database code
             db.query(`SELECT title FROM topic`, function(error, titles){
@@ -54,24 +58,28 @@ var app = http.createServer(function(request, response){
                 response.writeHead(200);
                 response.end(template.html(list, title,
                     `<p>${contents}</p>`,
-                    `<a href="./create">create page</a>`
+                    `<a href="./create" class="controlBtn">Create</a>`
                 ));
             });
         }else{ // query string이 있는 url이라면 해당 페이지를 생성
             title = queryData.id;
-            fs.readFile(`./nodejs_data/${queryData.id}`, "utf8", function(err, description){
-                contents = description;
+            var filteredId = path.parse(queryData.id).base;
+            fs.readFile(`./nodejs_data/${filteredId}`, "utf8", function(err, description){
+                var sanitizedTitle = sanitizeHtml(title);
+                var sanitizedDescription = sanitizeHtml(description);
                 fs.readdir("./nodejs_data", function(err, fileList){
                     list = template.makeFileList(fileList);
                     response.writeHead(200);
-                    response.end(template.html(list, title,
-                        `<p>${contents}</p>`,
+                    response.end(template.html(list, sanitizedTitle,
+                        `<p>${sanitizedDescription}</p>`,
                         `
-                        <a href="./create">create page</a> <a href="./update?id=${title}">update</a>
-                        <form action="/delete_process" method="POST">
-                            <input type="hidden" name="id" value="${title}">
-                            <input type="submit" value="delete">
-                        </form>
+                        <ul id="controlBtnList">
+                            <a href="./create" class="controlBtn">Create</a> <a href="./update?id=${sanitizedTitle}" class="controlBtn">Update</a>
+                            <form action="/delete_process" method="POST" class="controlBtn">
+                                <input type="hidden" name="id" value="${sanitizedTitle}">
+                                <input type="submit" value="Delete" >
+                            </form>
+                        </ul>
                         `
                     ));
                 })
@@ -89,7 +97,7 @@ var app = http.createServer(function(request, response){
         fs.readdir("./nodejs_data", function(err, fileList){
             list = template.makeFileList(fileList);
             response.writeHead(200);
-            response.end(template.html(list, title, `<p>${contents}</p>`, ``));
+            response.end(template.html(list, title, `${contents}`, ``));
         })
     }else if(pathName === "/create_process"){ // 생성된 데이터를 받아서 처리하는 부분
         var body = "";
@@ -103,8 +111,9 @@ var app = http.createServer(function(request, response){
             // console.log(post); // web browser에서 web server로 보내서 받아진 query string data가 javascript object data로 변환된 데이터이다.
             title = post.title;
             description = post.description;
-            fs.writeFile(`nodejs_data/${title}`, description, "utf8", function(err){
-                response.writeHead(302, {Location : `/?id=${title}`});
+            var filteredId = path.parse(title).base;
+            fs.writeFile(`nodejs_data/${filteredId}`, description, "utf8", function(err){
+                response.writeHead(302, {Location : `/?id=${filteredId}`});
                 // 서버가 응답을 마치면 Location의 값으로 사용자를 보낸다.
                 // 301 : 페이지가 완전히 이전되었습니다
                 // 302 : 리다이렉션
@@ -114,7 +123,8 @@ var app = http.createServer(function(request, response){
         })
     }else if(pathName === "/update"){ // 글 수정 UI 페이지를 만드는 부분
         title = `${queryData.id}`;
-        fs.readFile(`./nodejs_data/${queryData.id}`, "utf8", function(err, description){
+        var filteredId = path.parse(title).base;
+        fs.readFile(`./nodejs_data/${filteredId}`, "utf8", function(err, description){
             contents = `
             <form action="/update_process" method="post">
                 <input type="hidden" name="id" value="${title}"><br>
@@ -126,7 +136,7 @@ var app = http.createServer(function(request, response){
             fs.readdir("./nodejs_data", function(err, fileList){
                 list = template.makeFileList(fileList);
                 response.writeHead(200);
-                response.end(template.html(list, `${queryData.id}`, `<p>${contents}</p>`, ``));
+                response.end(template.html(list, `${queryData.id}`, `${contents}`, ``));
             })
         })
     }else if(pathName === "/update_process"){ // 글 수정 처리를 하는 부분
@@ -139,8 +149,9 @@ var app = http.createServer(function(request, response){
             var id = post.id;
             var title = post.title;
             var description = post.description;
+            var filteredId = path.parse(id).base;
 
-            fs.rename(`nodejs_data/${id}`, `nodejs_data/${title}`, function(err){
+            fs.rename(`nodejs_data/${filteredId}`, `nodejs_data/${title}`, function(err){
                 // 파일의 이름을 변경
                 fs.writeFile(`nodejs_data/${title}`, description, "utf8", function(err){
                     // 변경된 이름의 파일의 내용을 변경
@@ -158,8 +169,9 @@ var app = http.createServer(function(request, response){
         request.on("end", function(){
             var post = qs.parse(body);
             var id = post.id;
+            var filteredId = path.parse(id).base;
 
-            fs.unlink(`nodejs_data/${id}`, function(err){
+            fs.unlink(`nodejs_data/${filteredId}`, function(err){
                 response.writeHead(302, {Location: `/`});
                 response.end();
             })
