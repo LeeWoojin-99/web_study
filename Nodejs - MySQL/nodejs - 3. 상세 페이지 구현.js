@@ -42,11 +42,11 @@ var app = http.createServer(function(request, response){
 
     if(pathName === "/"){ // home page로 왔을 때
         if(queryData.id === undefined){ // query string이 없는 url이라면 home page
-            title = "Home Page";
-            contents = "Hello Node.js";
 
             /*
             file system code
+            title = "Home Page";
+            contents = "Hello Node.js";
             fs.readdir("./nodejs_data", function(err, fileList){
                 list = template.makeFileList(fileList); // 읽어온 파일 목록을 ul>li 태그로 구성한 문자열을 반환
                 response.writeHead(200); // 정상적인 서버의 응답임을 표시
@@ -58,6 +58,8 @@ var app = http.createServer(function(request, response){
             */
 
             // MySQL database code
+            title = "Home Page";
+            contents = "Hello Node.js";
             db.query(`SELECT title FROM topic`, function(error, titles){
                 if(error) console.log(error);
                 list = template.makeFileList(titles);
@@ -68,7 +70,6 @@ var app = http.createServer(function(request, response){
                 ));
             });
         }else{ // query string이 있는 url이라면 해당 페이지를 생성
-            var filteredId = path.parse(queryData.id).base;
 
             /*
             file system code
@@ -97,10 +98,11 @@ var app = http.createServer(function(request, response){
             */
             
             // MySQL database code
+            var filteredId = path.parse(queryData.id).base;
             db.query(`SELECT title FROM topic`, function(error, titles){
                 // 글 목록이 담겨진 titles
                 if(error) throw error;
-                db.query(`SELECT * FROM topic WHERE id=?`, [queryData.id], function(error2, topic){
+                db.query(`SELECT * FROM topic WHERE id=?`, [filteredId], function(error2, topic){
                     // 사용자가 요청한 글 정보이 담겨진 topic
 
                     // SELECT * FROM topic WHERE id=${queryData.id}
@@ -111,19 +113,22 @@ var app = http.createServer(function(request, response){
                     // 배열의 값이 ?에 치환되게 되는데 이 때 공격의 의도가 있는 데이터는 자동으로 세탁된다.
 
                     if(error2) throw error2;
+
                     title = topic[0].title;
                     contents = topic[0].description;
+                    list = template.makeFileList(titles);
+
                     var sanitizedTitle = sanitizeHtml(title);
                     var sanitizedDescription = sanitizeHtml(contents);
-                    list = template.makeFileList(titles);
+
                     response.writeHead(200);
                     response.end(template.html(list, sanitizedTitle,
                         `<p>${sanitizedDescription}</p>`,
                         `
                         <ul id="controlBtnList">
-                            <a href="./create" class="controlBtn">Create</a> <a href="./update?id=${queryData.id}" class="controlBtn">Update</a>
+                            <a href="./create" class="controlBtn">Create</a> <a href="./update?id=${filteredId}" class="controlBtn">Update</a>
                             <form action="/delete_process" method="POST" class="controlBtn">
-                                <input type="hidden" name="id" value="${queryData.id}">
+                                <input type="hidden" name="id" value="${filteredId}">
                                 <input type="submit" value="Delete" >
                             </form>
                         </ul>
