@@ -147,7 +147,7 @@ module.exports = {
     makeFileList:function(fileList){ // 이름들이 담긴 배열을 인수값으로 받아서 ul태그와 각 이름에 알맞는 li태그들을 구성하는 함수
         var list = "<ul id=\"fileList\">\n";
         for(i in fileList){
-            list += `${" ".repeat(4).repeat(5)}<li><a href = "/?id=${i}">${fileList[i].title}</a></li>\n`
+            list += `${" ".repeat(4).repeat(5)}<li><a href = "/?id=${fileList[i].id}">${fileList[i].title}</a></li>\n`
         }
         list += `${" ".repeat(4).repeat(4)}</ul>\n`;
         return list
