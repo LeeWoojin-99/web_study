@@ -52,7 +52,7 @@ var app = http.createServer(function(request, response){
             */
 
             // MySQL database code
-            db.query(`SELECT title FROM topic`, function(error, titles){
+            db.query(`SELECT * FROM topic`, function(error, titles){
                 if(error) console.log(error);
                 list = template.makeFileList(titles);
                 response.writeHead(200);

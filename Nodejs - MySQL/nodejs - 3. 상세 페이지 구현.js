@@ -3,7 +3,7 @@
 // 글의 내용을 볼 수 있는 상세 페이지를 구현하였다.
 
 // 글 목록을 구성하기 위해서 글 제목들을 전부 가져오는 SQL문
-// SELECT title FROM topic
+// SELECT * FROM topic
 // 위 SQL문의 콜백함수 내부에
 // 사용자가 요청한 글의 정보를 가져오는 SQL문
 // SELECT * FROM topic WHERE id=${queryData.id}
@@ -60,7 +60,7 @@ var app = http.createServer(function(request, response){
             // MySQL database code
             title = "Home Page";
             contents = "Hello Node.js";
-            db.query(`SELECT title FROM topic`, function(error, titles){
+            db.query(`SELECT * FROM topic`, function(error, titles){
                 if(error) console.log(error);
                 list = template.makeFileList(titles);
                 response.writeHead(200);
@@ -99,7 +99,7 @@ var app = http.createServer(function(request, response){
             
             // MySQL database code
             var filteredId = path.parse(queryData.id).base;
-            db.query(`SELECT title FROM topic`, function(error, titles){
+            db.query(`SELECT * FROM topic`, function(error, titles){
                 // 글 목록이 담겨진 titles
                 if(error) throw error;
                 db.query(`SELECT * FROM topic WHERE id=?`, [filteredId], function(error2, topic){
