@@ -151,5 +151,16 @@ module.exports = {
         }
         list += `${" ".repeat(4).repeat(4)}</ul>\n`;
         return list
+    },
+    authorSelect:function(authors){ // 저자를 선택하는 select태그, option태그를 구성하는 함수
+        var optionTag = ``;
+        for(i in authors){
+            optionTag += `${" ".repeat(4).repeat(6)}<option value="${authors[i].id}">${authors[i].name}</option>\n`;
+        }
+        return `
+                    <select name="author">
+${optionTag}
+                    </select>
+        `
     }
 }
