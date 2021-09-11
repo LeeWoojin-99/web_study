@@ -13,6 +13,10 @@
 // title = post.title;
 // description = post.description;
 
+// response.wrtieHead 메서드의 인수값 {Location : `/?=id=${data.insertId}`})
+// db.query()의 인자값 콜백함수의 두 번째 인자값의 속성인 insertId는
+// 마지막으로 삽입된 행의 id열의 값을 추출하는 것이다.
+
 var http = require("http");
 var fs = require("fs");
 var url = require("url");
