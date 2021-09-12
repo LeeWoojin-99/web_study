@@ -48,7 +48,7 @@ exports.create = function(request, response){ // 저자 생성 페이지 생성
             var title = "Author Craete Page";
             var list = template.makeFileList(titles);
             var contents = `
-            <form action="/author_create_process" method="post">
+            <form action="/author/create_process" method="post">
                 <input type="text" name="name" placeholder="name"><br>
                 <textarea name="profile" placeholder="profile"></textarea><br>
                 <input type="submit">
