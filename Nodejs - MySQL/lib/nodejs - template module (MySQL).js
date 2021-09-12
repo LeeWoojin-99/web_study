@@ -180,13 +180,12 @@ ${" ".repeat(4).repeat(5)}</select>
     authorTable:function(authors){
         var tag = "";
         for (i in authors){
-            console.log(i);
             tag += `
 <tr>
     <td>${authors[i].name}</td>
     <td>${authors[i].profile}</td>
-    <td><a href="/author/update">update</a></td>
-    <td><a href="/author/delete_process">delete</a></td>
+    <td><a href="/author/update?id=${authors[i].id}">update</a></td>
+    <td><a href="/author/delete_process?id=${authors[i].id}">delete</a></td>
 </tr>
             `;
         }
