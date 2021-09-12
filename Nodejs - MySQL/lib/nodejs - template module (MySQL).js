@@ -185,8 +185,8 @@ ${" ".repeat(4).repeat(5)}</select>
 <tr>
     <td>${authors[i].name}</td>
     <td>${authors[i].profile}</td>
-    <td>update</td>
-    <td>delete</td>
+    <td><a href="/author/update">update</a></td>
+    <td><a href="/author/delete_process">delete</a></td>
 </tr>
             `;
         }
