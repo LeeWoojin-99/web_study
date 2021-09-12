@@ -74,12 +74,12 @@ exports.create = function(request, response){
             var title = `Create Page`
             var list = template.makeFileList(titles);
             var contents = `
-            <form action="/create_process" method="post">
-                <input type="text" name="title" placeholder="title"><br>
-                <textarea name="description" placeholder="description"></textarea><br>
-                ${template.authorSelect(authors)}<br>
-                <input type="submit">
-            </form>
+                <form action="/create_process" method="post">
+                    <input type="text" name="title" placeholder="title"><br>
+                    <textarea name="description" placeholder="description"></textarea><br>
+                    ${template.authorSelect(authors)}<br>
+                    <input type="submit">
+                </form>
             `; // 입력받은 글 제목과 내용 데이터를 POST방식으로 서버에게 보내고 "/create_process"라는 url을 요청(request)하는 form 태그
 
             response.writeHead(200);
@@ -135,13 +135,13 @@ exports.update = function(request, response){
                 var title = `${topic[0].title} - Update`
                 var list = template.makeFileList(titles);
                 var contents = `
-                <form action="/update_process" method="post">
-                    <input type="hidden" name="id" value="${topic[0].id}"><br>
-                    <input type="text" name="title" placeholder="title" value="${topic[0].title}"><br>
-                    <textarea name="description" placeholder="description">${topic[0].description}</textarea><br>
-                    ${template.authorSelect(authors, topic[0].author_id)}<br>
-                    <input type="submit">
-                </form>
+                    <form action="/update_process" method="post">
+                        <input type="hidden" name="id" value="${topic[0].id}"><br>
+                        <input type="text" name="title" placeholder="title" value="${topic[0].title}"><br>
+                        <textarea name="description" placeholder="description">${topic[0].description}</textarea><br>
+                        ${template.authorSelect(authors, topic[0].author_id)}<br>
+                        <input type="submit">
+                    </form>
                 `; // authorSelect 메서드의 두 번째 인수값인 topic[0].author_id는 현재 저자가 누구인지에 관련된 데이터이다.
                 
                 response.writeHead(200);

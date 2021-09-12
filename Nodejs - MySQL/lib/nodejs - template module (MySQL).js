@@ -132,11 +132,22 @@ module.exports = {
                         font-size: 24px;
                         font-family: sans-serif;
                     }
+                    a#author{
+                        display: inline-block;
+                        width: 150px;
+                        height: 50px;
+                        background: rgb(255, 169, 169);
+                        text-align: center;
+                        line-height: 50px;
+                        font-size: 24px;
+                        border-radius: 20px;
+                    }
                 </style>
             </head>
             <body>
                 <h1><a href="/">WEB</a></h1>
                 <h2>${title}</h1>
+                <a href="/author" id="author">author</a>
                 ${list}
                 ${control}
                 ${body}
@@ -161,9 +172,28 @@ module.exports = {
             optionTag += `${" ".repeat(4).repeat(6)}<option value="${authors[i].id}"${selected}>${authors[i].name}</option>\n`;
         }
         return `
-                    <select name="author">
+${" ".repeat(4).repeat(5)}<select name="author">
 ${optionTag}
-                    </select>
+${" ".repeat(4).repeat(5)}</select>
+        `
+    },
+    authorTable:function(authors){
+        var tag = "";
+        for (i in authors){
+            console.log(i);
+            tag += `
+<tr>
+    <td>${authors[i].name}</td>
+    <td>${authors[i].profile}</td>
+    <td>update</td>
+    <td>delete</td>
+</tr>
+            `;
+        }
+        return `
+<table>
+${tag}
+</table>
         `
     }
 }
