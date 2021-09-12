@@ -2,6 +2,7 @@ var db = require("./db");
 var template = require("./nodejs - template module (MySQL).js");
 var url = require("url");
 var qs = require("querystring");
+var sanitizeHtml = require("sanitize-html");
 
 exports.home = function(request, response){
     db.query(`SELECT * FROM topic`, function(error, titles){
@@ -16,7 +17,6 @@ exports.home = function(request, response){
             response.writeHead(200);
             response.end(template.html(list, title,
                 `
-                ${contents}
                 <style>
                     table{
                         font-size: 30px;
@@ -28,6 +28,7 @@ exports.home = function(request, response){
                         padding: 10px;
                     }
                 </style>
+                ${contents}
                 `,
                 `
                 <ul id="controlBtnList">
@@ -114,8 +115,8 @@ exports.update = function(request, response){
                     </style>
                     <form action="/author/update_process" method="post">
                         <input type="hidden" name="id" value="${author[0].id}"><br>
-                        <input type="text" name="name" placeholder="name" value="${author[0].name}"><br>
-                        <textarea name="profile" placeholder="profile">${author[0].profile}</textarea><br>
+                        <input type="text" name="name" placeholder="name" value="${sanitizeHtml(author[0].name)}"><br>
+                        <textarea name="profile" placeholder="profile">${sanitizeHtml(author[0].profile)}</textarea><br>
                         <input type="submit">
                     </form>
                     `, // form태그에서 변수 id, name, profile을 query string 형태의 데이터로 서버에게 전송

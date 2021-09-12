@@ -3,6 +3,7 @@ var template = require("./nodejs - template module (MySQL).js");
 var url = require("url");
 var qs = require("querystring");
 // html의 form 태그에서 서버로 보내는 데이터가 query string 형태의 데이터이기 때문에 받아온 데이터를 js의 객체 형태로 변환해주는 기능을 사용하기 위한 'querystring' 모듈
+var sanitizeHtml = require("sanitize-html");
 
 exports.home = function(request, response){
     db.query(`SELECT * FROM topic`, function(error, titles){
@@ -43,13 +44,13 @@ exports.page = function(request, response){
             // 배열의 값이 ?에 치환되게 되는데 이 때 공격의 의도가 있는 데이터는 자동으로 세탁된다.
 
             var title = topic[0].title;
-            var contents = topic[0].description;
+            var contents = sanitizeHtml(topic[0].description);
             var list = template.makeFileList(titles);
 
             response.writeHead(200);
             response.end(template.html(list, title,
                 `<p>${contents}</p>
-                By ${topic[0].name}`,
+                By ${sanitizeHtml(topic[0].name)}`,
                 `
                 <ul id="controlBtnList">
                     <a href="./create" class="controlBtn">Create</a> <a href="./update?id=${queryData.id}" class="controlBtn">Update</a>
@@ -137,8 +138,8 @@ exports.update = function(request, response){
                 var contents = `
                     <form action="/update_process" method="post">
                         <input type="hidden" name="id" value="${topic[0].id}"><br>
-                        <input type="text" name="title" placeholder="title" value="${topic[0].title}"><br>
-                        <textarea name="description" placeholder="description">${topic[0].description}</textarea><br>
+                        <input type="text" name="title" placeholder="title" value="${sanitizeHtml(topic[0].title)}"><br>
+                        <textarea name="description" placeholder="description">${sanitizeHtml(topic[0].description)}</textarea><br>
                         ${template.authorSelect(authors, topic[0].author_id)}<br>
                         <input type="submit">
                     </form>
@@ -177,7 +178,7 @@ exports.update_process = function(request, response){
     })
 }
 
-exports.delete = function(request, response){
+exports.delete_process = function(request, response){
     var body = "";
     request.on("data", function(data){
         body += data;
