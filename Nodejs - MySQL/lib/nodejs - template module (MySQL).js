@@ -185,7 +185,12 @@ ${" ".repeat(4).repeat(5)}</select>
     <td>${authors[i].name}</td>
     <td>${authors[i].profile}</td>
     <td><a href="/author/update?id=${authors[i].id}">update</a></td>
-    <td><a href="/author/delete_process?id=${authors[i].id}">delete</a></td>
+    <td>
+        <form action="/author/delete_process" method="POST">
+            <input type="hidden" name="id" value="${authors[i].id}">
+            <input type="submit" value="Delete" >
+        </form>
+    </td>
 </tr>
             `;
         }

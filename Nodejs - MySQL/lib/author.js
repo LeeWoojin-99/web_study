@@ -31,7 +31,7 @@ exports.home = function(request, response){
                 `,
                 `
                 <ul id="controlBtnList">
-                    <a href="./author_create" class="controlBtn">Create</a>
+                    <a href="/author/create" class="controlBtn">Create</a>
                 </ul>
                 `
             ));
@@ -121,7 +121,7 @@ exports.update = function(request, response){
                     `, // form태그에서 변수 id, name, profile을 query string 형태의 데이터로 서버에게 전송
                     `
                     <ul id="controlBtnList">
-                        <a href="/create" class="controlBtn">Create</a>
+                        <a href="/author/create" class="controlBtn">Create</a>
                     </ul>
                     `
                 ));
@@ -147,6 +147,17 @@ exports.update_process = function(request, response){
     })
 }
 
-exports.update_delete = function(request, response){
-    
+exports.delete_process = function(request, response){
+    var body = "";
+    request.on("data", function(data){
+        body += data;
+    })
+    request.on("end", function(){
+        var post = qs.parse(body);
+        db.query(`DELETE FROM author WHERE id=?`, [post.id], function(err, data){
+            if(err) throw err;
+            response.writeHead(302, {Location : `/author`});
+            response.end();
+        })
+    })
 }
