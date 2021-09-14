@@ -16,8 +16,8 @@
 
 var http = require("http");
 var url = require("url");
-var topic = require("../../../Study Codes/lib/topic.js");
-var author = require("../../../Study Codes/lib/author.js");
+var topic = require("./Study Codes/lib/topic.js");
+var author = require("./Study Codes/lib/author.js");
 
 var app = http.createServer(function(request, response){
     var _url = request.url;
