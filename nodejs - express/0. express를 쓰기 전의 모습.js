@@ -1,4 +1,4 @@
-// nodejs - 0. express를 쓰기 전의 모습
+// 0. express를 쓰기 전의 모습
 
 // framwork express를 사용하기 전의 웹 애플리케이션의 모습이다.
 // node.js와 MySQL로 구현한 웹 애플리케이션이다.
