@@ -5,8 +5,8 @@
 var express = require('express');
 var app = express();
 
-var db = require("../../../Study Codes/lib/db");
-var template = require("../../../Study Codes/lib/template");
+var db = require("./lib/db");
+var template = require("./lib/template");
 
 app.get("/", function(request, response){
     db.query(`SELECT * FROM topic`, function(error, titles){
