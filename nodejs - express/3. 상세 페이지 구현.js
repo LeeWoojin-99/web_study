@@ -36,7 +36,7 @@ app.get("/page/:pageId", function(request, response){
     
     // "/page/:pageId"
     // "/:pageId"를 route parameter라고 한다. URL segment라고도 한다.
-    // URL의 위치에서 지정된 값을 캡쳐하는 데 사용된다.
+    // URL segment는 URL의 위치에서 지정된 값을 캡쳐하는 데 사용된다.
     // 콜론이 붙은 데이터는 request.params 객체의 속성 형태로 저장된다.
     // console.log(request.params); // {"pageId": "..."}
 
