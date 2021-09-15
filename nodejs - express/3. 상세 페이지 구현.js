@@ -4,7 +4,8 @@
 // query string을 route parameter(= URL segment)로 변경
 
 // /page/:pageId
-// pageId에 해당하는 글의 데이터를 읽어온다.
+// request.params를 이용하여 route parameter를 읽어와서
+// pageId 속성의 값에 해당하는 글의 데이터를 읽어온다.
 
 var express = require('express');
 var app = express();
