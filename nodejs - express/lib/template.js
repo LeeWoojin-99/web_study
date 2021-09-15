@@ -4,20 +4,20 @@ module.exports = {
     html:function(list, title, body, control){
     // HTML에 대한 template를 제작하여 반환하는 함수 함수
         return `
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>${title}</title>
-        </head>
-        <body>
-            <h1><a href="/">WEB</a></h1>
-            <h2>${sanitizeHtml(title)}</h1>
-            <a href="/author" id="author">author</a>
-            ${list}
-            ${control}
-            ${body}
-        </body>
-        </html>
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>${title}</title>
+            </head>
+            <body>
+                <h1><a href="/">WEB</a></h1>
+                <h2>${sanitizeHtml(title)}</h1>
+                <a href="/author" id="author">author</a>
+                ${list}
+                ${control}
+                ${body}
+            </body>
+            </html>
         `;
     },
     list:function(fileList){
@@ -39,32 +39,32 @@ module.exports = {
             optionTag += `<option value="${authors[i].id}"${selected}>${sanitizeHtml(authors[i].name)}</option>\n`;
         }
         return `
-        <select name="author">
-        ${optionTag}
-        </select>
+            <select name="author">
+            ${optionTag}
+            </select>
         `;
     },
     authorTable:function(authors){
         var tag = "";
         for (i in authors){
             tag += `
-            <tr>
-                <td>${sanitizeHtml(authors[i].name)}</td>
-                <td>${sanitizeHtml(authors[i].profile)}</td>
-                <td><a href="/author/update/${authors[i].id}">update</a></td>
-                <td>
-                    <form action="/author/delete_process" method="POST">
-                        <input type="hidden" name="id" value="${authors[i].id}">
-                        <input type="submit" value="Delete" >
-                    </form>
-                </td>
-            </tr>
+                <tr>
+                    <td>${sanitizeHtml(authors[i].name)}</td>
+                    <td>${sanitizeHtml(authors[i].profile)}</td>
+                    <td><a href="/author/update/${authors[i].id}">update</a></td>
+                    <td>
+                        <form action="/author/delete_process" method="POST">
+                            <input type="hidden" name="id" value="${authors[i].id}">
+                            <input type="submit" value="Delete" >
+                        </form>
+                    </td>
+                </tr>
             `;
         }
         return `
-        <table>
-        ${tag}
-        </table>
+            <table>
+            ${tag}
+            </table>
         `;
     }
 }
