@@ -1,4 +1,4 @@
-// 7. middleware 만들기
+// 6. middleware 만들기
 
 // 인자값이 request, response, next인 함수를 만들었다면 그것이 바로 미들웨어 이며
 // 그 미들웨어를 인수값으로 한 app.use()를 호출하면 인수값으로 쓰인 미들웨어를 사용한다는 것이다.
