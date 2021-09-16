@@ -17,6 +17,8 @@
 // 사용 방법
 // app.use(express.json());
 // 위 문장처럼 app.use()의 인수값에 넣어서 사용된다.
+// express가 만들어내는 미들웨어를 표현하는 표현식 'express.json()'
+// 사용자가 요청할 때마다 미들웨어가 실행된다.
 
 // express.json()
 // JSON : JavaScript Object Notaion
