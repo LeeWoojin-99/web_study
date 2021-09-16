@@ -10,7 +10,7 @@
 // app.get(path, middleware function);
 // app.get()에서 쓰이던 두 번째 인자값으로 오던 function이 callback function이 아닌 middleware function이었다.
 
-// 즉 app.use(), app.get(), app.post()로 여러 개의 미들웨어가 존재하고
+// 즉 이 웹 애플리케이션은 app.use(), app.get(), app.post()로 여러 개의 미들웨어를 사용하고 있었으며
 // 클라이언트의 요청에 해당되는 middleware가 등록된 순서대로 실행된다.
 
 // 각각의 프로그램(middleware function)이 서로와 서로를 이어주는 작은 프로그램이라는 점에서 middleware라는 표현을 한 것일 수도 있다.
