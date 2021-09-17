@@ -21,8 +21,8 @@ var express = require('express');
 var app = express();
 var compression = require("compression");
 
-var db = require("../../../Study Codes/lib/db");
-var template = require("../../../Study Codes/lib/template");
+var db = require("./lib/db");
+var template = require("./lib/template");
 var sanitizeHtml = require("sanitize-html");
 
 app.use(express.urlencoded({ extended: false }));
