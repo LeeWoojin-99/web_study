@@ -23,7 +23,7 @@ module.exports = {
     // 이름들이 담긴 배열을 인수값으로 받아서 ul태그와 각 이름에 알맞는 li태그들을 구성하는 함수
         var list = `<ul id="fileList">\n`;
         for(i in fileList){
-            list += `<li><a href = "/page/${fileList[i].id}">${sanitizeHtml(fileList[i].title)}</a></li>\n`
+            list += `<li><a href = "/topic/${fileList[i].id}">${sanitizeHtml(fileList[i].title)}</a></li>\n`
         }
         list += `</ul>\n`;
         return list;
