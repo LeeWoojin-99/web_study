@@ -2,7 +2,6 @@
 
 // template engine을 사용하면 application에서 static template files를 사용할 수 있다.
 // ejs파일을 web application에서 렌더링하여 사용할 수 있다.
-// ejs파일에 css file을 link시킬 수 있다.
 
 var express = require("express");
 var app = express();
